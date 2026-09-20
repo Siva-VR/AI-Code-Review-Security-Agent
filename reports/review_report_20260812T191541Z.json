@@ -1,0 +1,101 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 5,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 2,
+      "Critical": 3
+    },
+    "risk_score": 18
+  },
+  "findings": [
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 1,
+      "message": "Hardcoded sensitive information",
+      "recommendation": "Store sensitive information securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 5,
+      "message": "SQL injection vulnerability",
+      "recommendation": "Use parameterized queries or prepared statements to prevent SQL injection",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Use of eval function with user input",
+      "recommendation": "Avoid using eval with user input, use a safer alternative such as ast.literal_eval",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "High",
+      "line": 9,
+      "message": "Use of exec function",
+      "recommendation": "Avoid using exec, use a safer alternative such as importlib or a subprocess with a whitelist of allowed commands",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "High",
+      "line": 11,
+      "message": "Use of subprocess with shell=True",
+      "recommendation": "Avoid using shell=True, use a safer alternative such as subprocess.run with a list of arguments",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 2,
+    "Critical": 3
+  },
+  "risk_score": 18,
+  "total_findings": 5,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

@@ -1,0 +1,54 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": null,
+  "summary": {
+    "total_findings": 2,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 2
+    },
+    "risk_score": 8
+  },
+  "findings": [
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Unsafe SQL string concatenation.",
+      "recommendation": "Use parameterized queries.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Replace string concatenation with parameterized queries",
+        "corrected_code_example": "\nimport sqlite3\n\n# assuming a SQLite database\nconn = sqlite3.connect('database.db')\ncursor = conn.cursor()\n\nname = input()\nquery = \"\"\"SELECT * FROM users WHERE name=?\"\"\"\ncursor.execute(query, (name,))\n\nresults = cursor.fetchall()\nfor row in results:\n    print(row)\n\nconn.close()\n",
+        "best_practice_explanation": "Parameterized queries prevent SQL injection by separating code from user input, ensuring that input is treated as literal data, not executable code.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 9,
+      "message": "eval(input()) usage.",
+      "recommendation": "Remove eval.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Replace eval(input()) with a safer input validation and processing mechanism",
+        "corrected_code_example": "user_input = input(); print(f'Received input: {user_input}')",
+        "best_practice_explanation": "Using eval() with user input allows for arbitrary code execution, making it a critical security risk. Instead, validate and process user input in a controlled manner to prevent code injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 2
+  },
+  "risk_score": 8,
+  "total_findings": 2,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

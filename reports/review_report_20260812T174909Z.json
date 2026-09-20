@@ -1,0 +1,54 @@
+{
+  "language": "java",
+  "review_mode": "openai",
+  "model": null,
+  "summary": {
+    "total_findings": 2,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 2
+    },
+    "risk_score": 8
+  },
+  "findings": [
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 10,
+      "message": "Unsafe SQL string formatting.",
+      "recommendation": "Use prepared statements.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 18,
+      "message": "Runtime.exec with unsanitized input.",
+      "recommendation": "Avoid shell execution with user input.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 2
+  },
+  "risk_score": 8,
+  "total_findings": 2,
+  "code": "public class VulnerableSecurity {\n    public void runQuery(String name, String table) {\n        String password = \"admin123\";\n        String api_key = \"ABC-123-SECRET\";\n        String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";\n        System.out.println(query + password + api_key);\n        Runtime.getRuntime().exec(\"cmd /c dir \" + name);\n    }\n}\n"
+}

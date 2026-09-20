@@ -1,0 +1,108 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 6,
+    "critical": 4,
+    "high": 1,
+    "medium": 0,
+    "low": 1
+  },
+  "findings": [
+    {
+      "type": "Hardcoded Credentials",
+      "severity": "Critical",
+      "line": 1,
+      "message": "Hardcoded password found in the code",
+      "recommendation": "Store sensitive credentials securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded Credentials",
+      "severity": "Critical",
+      "line": 3,
+      "message": "Hardcoded API key found in the code",
+      "recommendation": "Store sensitive credentials securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 5,
+      "message": "User input is directly concatenated into a SQL query, making it vulnerable to SQL injection attacks",
+      "recommendation": "Use parameterized queries or prepared statements to prevent SQL injection",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Arbitrary Code Execution",
+      "severity": "Critical",
+      "line": 7,
+      "message": "The eval() function can execute arbitrary code, posing a significant security risk",
+      "recommendation": "Avoid using eval() and instead use safer alternatives, such as ast.literal_eval() for simple expressions",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Arbitrary Code Execution",
+      "severity": "Critical",
+      "line": 9,
+      "message": "The exec() function can execute arbitrary code, posing a significant security risk",
+      "recommendation": "Avoid using exec() and instead use safer alternatives, such as importing modules or using functions",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "High",
+      "line": 12,
+      "message": "The subprocess.run() function is used with shell=True, making it vulnerable to command injection attacks",
+      "recommendation": "Use subprocess.run() with shell=False and pass the command as a list of arguments to prevent command injection",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 429 Client Error: Too Many Requests for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {},
+  "risk_score": null,
+  "total_findings": 6,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

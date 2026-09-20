@@ -1,0 +1,41 @@
+{
+  "language": "python",
+  "review_mode": "groq_only",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 1
+    },
+    "risk_score": 4
+  },
+  "findings": [
+    {
+      "type": "Groq Review Error",
+      "severity": "Critical",
+      "line": null,
+      "message": "Groq review request failed: Expecting value: line 1 column 1 (char 0)",
+      "recommendation": "Set a valid GROQ_API_KEY and verify Groq API connectivity.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: Expecting value: line 1 column 1 (char 0)",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 1
+  },
+  "risk_score": 4,
+  "total_findings": 1,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

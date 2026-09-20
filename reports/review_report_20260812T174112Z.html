@@ -1,0 +1,67 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; color: #111827; margin: 32px; }
+    h1, h2, h3 { color: #0f172a; }
+    .meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 18px; }
+    .card { border: 1px solid #dbe4f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #dbe4f0; padding: 8px 10px; vertical-align: top; text-align: left; }
+    th { background: #f8fbff; }
+    .code { background: #0b1020; color: #e5e7eb; padding: 14px; border-radius: 10px; white-space: normal; }
+    .small { color: #475569; font-size: 0.92rem; }
+  </style>
+</head>
+<body>
+  <h1>Code Review Report</h1>
+  <div class="meta small">
+    <div><strong>Language:</strong> python</div>
+    <div><strong>Review mode:</strong> openai</div>
+    <div><strong>Model:</strong> unknown</div>
+    <div><strong>Generated:</strong> 2026-08-12 17:41 UTC</div>
+  </div>
+
+  <div class="card">
+    <h2>Overall Assessment</h2>
+    <p>1 Medium severity finding requiring attention</p>
+    <p class="small"><strong>Merge readiness:</strong> Not Ready</p>
+    <p class="small"><strong>Code health:</strong> 92/100</p>
+  </div>
+
+  <div class="card">
+    <h2>Findings Summary</h2>
+    <p class="small"><strong>Total findings:</strong> 1</p>
+    <p class="small"><strong>Risk score:</strong> 2</p>
+    <p class="small"><strong>Severity breakdown:</strong> Low 0, Medium 1, High 0, Critical 0</p>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Severity</th><th>Line</th><th>Message</th><th>Recommendation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Model Review</td><td>Medium</td><td>1</td><td>Model-backed review result.</td><td>Refactor the logic.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Remediation Roadmap</h2>
+    <table>
+      <thead>
+        <tr><th>Finding</th><th>Severity</th><th>Impact</th><th>Suggested Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Model Review</td><td>Medium</td><td>Refactor the logic</td><td>Replace print statement with logging, e.g., import logging
+logging.info(&#x27;hello&#x27;)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Source Code Snapshot</h2>
+    <div class="code">print(&#x27;hello&#x27;)</div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+{
+  "language": "java",
+  "review_mode": "hybrid",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 9,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 4,
+      "Critical": 5
+    },
+    "risk_score": 32
+  },
+  "findings": [
+    {
+      "type": "Hardcoded Secret",
+      "severity": "High",
+      "line": 3,
+      "message": "String password = \"admin123\";",
+      "recommendation": "Load secrets from environment variables or a secure vault.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded Secret",
+      "severity": "High",
+      "line": 4,
+      "message": "String api_key = \"ABC-123-SECRET\";",
+      "recommendation": "Load secrets from environment variables or a secure vault.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 5,
+      "message": "String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";",
+      "recommendation": "Use prepared statements and parameter binding.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Runtime.getRuntime().exec(\"cmd /c dir \" + name);",
+      "recommendation": "Avoid shell execution with user-controlled input.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded Password",
+      "severity": "High",
+      "line": 3,
+      "message": "String password = \"admin123\";",
+      "recommendation": "Store passwords in environment variables.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded API Key",
+      "severity": "High",
+      "line": 4,
+      "message": "String api_key = \"ABC-123-SECRET\";",
+      "recommendation": "Store secrets securely.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Runtime.getRuntime().exec(\"cmd /c dir \" + name);",
+      "recommendation": "Avoid dynamic code execution.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 10,
+      "message": "Unsafe SQL string formatting.",
+      "recommendation": "Use prepared statements.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 18,
+      "message": "Runtime.exec with unsanitized input.",
+      "recommendation": "Avoid shell execution with user input.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 4,
+    "Critical": 5
+  },
+  "risk_score": 32,
+  "total_findings": 9,
+  "code": "public class VulnerableSecurity {\n    public void runQuery(String name, String table) {\n        String password = \"admin123\";\n        String api_key = \"ABC-123-SECRET\";\n        String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";\n        System.out.println(query + password + api_key);\n        Runtime.getRuntime().exec(\"cmd /c dir \" + name);\n    }\n}\n"
+}

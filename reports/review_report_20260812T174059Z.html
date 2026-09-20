@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; color: #111827; margin: 32px; }
+    h1, h2, h3 { color: #0f172a; }
+    .meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 18px; }
+    .card { border: 1px solid #dbe4f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #dbe4f0; padding: 8px 10px; vertical-align: top; text-align: left; }
+    th { background: #f8fbff; }
+    .code { background: #0b1020; color: #e5e7eb; padding: 14px; border-radius: 10px; white-space: normal; }
+    .small { color: #475569; font-size: 0.92rem; }
+  </style>
+</head>
+<body>
+  <h1>Code Review Report</h1>
+  <div class="meta small">
+    <div><strong>Language:</strong> python</div>
+    <div><strong>Review mode:</strong> openai</div>
+    <div><strong>Model:</strong> unknown</div>
+    <div><strong>Generated:</strong> 2026-08-12 17:40 UTC</div>
+  </div>
+
+  <div class="card">
+    <h2>Overall Assessment</h2>
+    <p>Two critical findings were identified in the code review, posing significant security risks. Immediate attention is required to address these issues.</p>
+    <p class="small"><strong>Merge readiness:</strong> Not ready for merge due to critical security findings</p>
+    <p class="small"><strong>Code health:</strong> 68/100</p>
+  </div>
+
+  <div class="card">
+    <h2>Findings Summary</h2>
+    <p class="small"><strong>Total findings:</strong> 2</p>
+    <p class="small"><strong>Risk score:</strong> 8</p>
+    <p class="small"><strong>Severity breakdown:</strong> Low 0, Medium 0, High 0, Critical 2</p>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Severity</th><th>Line</th><th>Message</th><th>Recommendation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SQL Injection</td><td>Critical</td><td>7</td><td>Unsafe SQL string concatenation.</td><td>Use parameterized queries.</td></tr><tr><td>Dangerous Dynamic Execution</td><td>Critical</td><td>9</td><td>eval(input()) usage.</td><td>Remove eval.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Remediation Roadmap</h2>
+    <table>
+      <thead>
+        <tr><th>Finding</th><th>Severity</th><th>Impact</th><th>Suggested Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SQL Injection</td><td>Critical</td><td>High risk of SQL injection attacks</td><td>Replace string concatenation with parameterized queries, e.g., import sqlite3; conn = sqlite3.connect(&#x27;database.db&#x27;); cursor = conn.cursor(); name = input(); query = &quot;SELECT * FROM users WHERE name=?&quot;; cursor.execute(query, (name,))</td></tr><tr><td>Dangerous Dynamic Execution</td><td>Critical</td><td>High risk of arbitrary code execution</td><td>Remove eval() and replace with safer input validation and parsing mechanisms, e.g., user_input = input(); print(f&#x27;Received input: {user_input}&#x27;)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Source Code Snapshot</h2>
+    <div class="code">password = &quot;admin123&quot;<br><br>api_key = &quot;123456789&quot;<br><br>name = input()<br><br>query = &quot;SELECT * FROM users WHERE name=&#x27;&quot; + name + &quot;&#x27;&quot;<br><br>eval(input())<br><br>exec(&quot;print(&#x27;Hello&#x27;)&quot;)<br><br>import subprocess<br><br>subprocess.run(&quot;dir&quot;, shell=True)</div>
+  </div>
+</body>
+</html>

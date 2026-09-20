@@ -1,0 +1,128 @@
+{
+  "language": "java",
+  "review_mode": "hybrid",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 7,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 5,
+      "High": 2,
+      "Critical": 0
+    },
+    "risk_score": 16
+  },
+  "findings": [
+    {
+      "type": "Long Parameter List",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Method has 6 parameters.",
+      "recommendation": "Reduce parameter count by grouping related inputs into a value object.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Long Method",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Method spans 22 lines.",
+      "recommendation": "Split the method into smaller helpers with a single responsibility.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Deep Nesting",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Method contains 6 nested control-flow statements.",
+      "recommendation": "Flatten the control flow using guard clauses or extracted methods.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Large Class",
+      "severity": "Medium",
+      "line": 1,
+      "message": "Class declares 17 methods.",
+      "recommendation": "Split the class into smaller cohesive components.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Long Parameter List",
+      "severity": "High",
+      "line": 12,
+      "message": "Too many parameters.",
+      "recommendation": "Group related parameters.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Deep Nesting",
+      "severity": "High",
+      "line": 20,
+      "message": "Complex nested blocks.",
+      "recommendation": "Extract helper methods.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Large Class",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Class has too many responsibilities.",
+      "recommendation": "Split class by domain concern.",
+      "severity_score": 2,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 5,
+    "High": 2,
+    "Critical": 0
+  },
+  "risk_score": 16,
+  "total_findings": 7,
+  "code": "public class BadCode {\n    public int processOrder(int a, int b, int c, int d, int e, int f) {\n        int result = 0;\n        if (a > 10) {\n            result += a;\n            if (b > 10) {\n                result += b;\n                if (c > 10) {\n                    result += c;\n                    if (d > 10) {\n                        result += d;\n                        if (e > 10) {\n                            result += e;\n                            if (f > 10) {\n                                result += f;\n                            }\n                        }\n                    }\n                }\n            }\n        }\n        return result;\n    }\n\n    public void helperOne() {}\n    public void helperTwo() {}\n    public void helperThree() {}\n    public void helperFour() {}\n    public void helperFive() {}\n    public void helperSix() {}\n    public void helperSeven() {}\n    public void helperEight() {}\n    public void helperNine() {}\n    public void helperTen() {}\n    public void helperEleven() {}\n    public void helperTwelve() {}\n    public void helperThirteen() {}\n    public void helperFourteen() {}\n    public void helperFifteen() {}\n    public void helperSixteen() {}\n}\n"
+}

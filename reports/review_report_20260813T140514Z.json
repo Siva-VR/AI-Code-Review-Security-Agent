@@ -1,0 +1,66 @@
+{
+  "language": "python",
+  "review_mode": "hybrid",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 3,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 1,
+      "High": 1,
+      "Critical": 1
+    },
+    "risk_score": 9
+  },
+  "findings": [
+    {
+      "type": "Complexity",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Too complex",
+      "recommendation": "Refactor",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 1,
+      "message": "eval() used",
+      "recommendation": "Remove eval",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Model Review",
+      "severity": "High",
+      "line": 3,
+      "message": "Model result.",
+      "recommendation": "Improve logic.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 401 Client Error: Unauthorized for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 1,
+    "High": 1,
+    "Critical": 1
+  },
+  "risk_score": 9,
+  "total_findings": 3,
+  "code": "eval(input())"
+}

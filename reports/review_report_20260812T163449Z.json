@@ -1,0 +1,54 @@
+{
+  "language": "java",
+  "review_mode": "openai",
+  "model": null,
+  "summary": {
+    "total_findings": 2,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 2
+    },
+    "risk_score": 8
+  },
+  "findings": [
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 10,
+      "message": "Unsafe SQL string formatting.",
+      "recommendation": "Use prepared statements.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Replace string concatenation with prepared statements",
+        "corrected_code_example": "PreparedStatement statement = connection.prepareStatement(\"SELECT * FROM ? WHERE name = ?\"); statement.setString(1, table); statement.setString(2, name);",
+        "best_practice_explanation": "Using prepared statements prevents SQL injection by separating code from user input, ensuring that input is treated as data, not as part of the SQL command.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 18,
+      "message": "Runtime.exec with unsanitized input.",
+      "recommendation": "Avoid shell execution with user input.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Use parameterized queries and avoid Runtime.exec with user input",
+        "corrected_code_example": "public class SecureSecurity {\n    public void runQuery(String name, String table) {\n        // Using a parameterized query to prevent SQL injection\n        String query = \"SELECT * FROM \" + table + \" WHERE name = ?\";\n        // Avoid Runtime.exec, instead use Java's File API\n        File file = new File(name);\n        System.out.println(file.exists());\n    }\n}",
+        "best_practice_explanation": "Using parameterized queries prevents command injection by ensuring user input is treated as literal input, not as part of the command. Avoiding Runtime.exec prevents shell execution with user input, reducing the risk of command injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 2
+  },
+  "risk_score": 8,
+  "total_findings": 2,
+  "code": "public class VulnerableSecurity {\n    public void runQuery(String name, String table) {\n        String password = \"admin123\";\n        String api_key = \"ABC-123-SECRET\";\n        String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";\n        System.out.println(query + password + api_key);\n        Runtime.getRuntime().exec(\"cmd /c dir \" + name);\n    }\n}\n"
+}

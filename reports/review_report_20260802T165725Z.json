@@ -1,0 +1,25 @@
+{
+  "language": "python",
+  "review_mode": "local",
+  "model": null,
+  "summary": {
+    "total_findings": 0,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 0
+    },
+    "risk_score": 0
+  },
+  "findings": [],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 0
+  },
+  "risk_score": 0,
+  "total_findings": 0,
+  "code": "print('hello')"
+}

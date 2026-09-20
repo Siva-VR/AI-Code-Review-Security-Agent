@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; color: #111827; margin: 32px; }
+    h1, h2, h3 { color: #0f172a; }
+    .meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 18px; }
+    .card { border: 1px solid #dbe4f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #dbe4f0; padding: 8px 10px; vertical-align: top; text-align: left; }
+    th { background: #f8fbff; }
+    .code { background: #0b1020; color: #e5e7eb; padding: 14px; border-radius: 10px; white-space: normal; }
+    .small { color: #475569; font-size: 0.92rem; }
+  </style>
+</head>
+<body>
+  <h1>Code Review Report</h1>
+  <div class="meta small">
+    <div><strong>Language:</strong> java</div>
+    <div><strong>Review mode:</strong> openai</div>
+    <div><strong>Model:</strong> unknown</div>
+    <div><strong>Generated:</strong> 2026-08-12 17:41 UTC</div>
+  </div>
+
+  <div class="card">
+    <h2>Overall Assessment</h2>
+    <p>The code review has identified 3 findings with a risk score of 8, indicating areas that require attention to improve code quality and maintainability.</p>
+    <p class="small"><strong>Merge readiness:</strong> Not Ready</p>
+    <p class="small"><strong>Code health:</strong> 68/100</p>
+  </div>
+
+  <div class="card">
+    <h2>Findings Summary</h2>
+    <p class="small"><strong>Total findings:</strong> 3</p>
+    <p class="small"><strong>Risk score:</strong> 8</p>
+    <p class="small"><strong>Severity breakdown:</strong> Low 0, Medium 1, High 2, Critical 0</p>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Severity</th><th>Line</th><th>Message</th><th>Recommendation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Long Parameter List</td><td>High</td><td>12</td><td>Too many parameters.</td><td>Group related parameters.</td></tr><tr><td>Deep Nesting</td><td>High</td><td>20</td><td>Complex nested blocks.</td><td>Extract helper methods.</td></tr><tr><td>Large Class</td><td>Medium</td><td>2</td><td>Class has too many responsibilities.</td><td>Split class by domain concern.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Remediation Roadmap</h2>
+    <table>
+      <thead>
+        <tr><th>Finding</th><th>Severity</th><th>Impact</th><th>Suggested Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Deep Nesting</td><td>High</td><td>Complex nested blocks reduce code readability and maintainability</td><td>Extract helper methods to simplify logic and improve readability</td></tr><tr><td>Long Parameter List</td><td>High</td><td>Too many parameters reduce code readability and increase the likelihood of errors</td><td>Group related parameters into a single object to improve code readability and maintainability</td></tr><tr><td>Large Class</td><td>Medium</td><td>Class has too many responsibilities, reducing maintainability and scalability</td><td>Split class by domain concern to improve maintainability, readability, and scalability</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Source Code Snapshot</h2>
+    <div class="code">public class BadCode {<br>    public int processOrder(int a, int b, int c, int d, int e, int f) {<br>        int result = 0;<br>        if (a &gt; 10) {<br>            result += a;<br>            if (b &gt; 10) {<br>                result += b;<br>                if (c &gt; 10) {<br>                    result += c;<br>                    if (d &gt; 10) {<br>                        result += d;<br>                        if (e &gt; 10) {<br>                            result += e;<br>                            if (f &gt; 10) {<br>                                result += f;<br>                            }<br>                        }<br>                    }<br>                }<br>            }<br>        }<br>        return result;<br>    }<br><br>    public void helperOne() {}<br>    public void helperTwo() {}<br>    public void helperThree() {}<br>    public void helperFour() {}<br>    public void helperFive() {}<br>    public void helperSix() {}<br>    public void helperSeven() {}<br>    public void helperEight() {}<br>    public void helperNine() {}<br>    public void helperTen() {}<br>    public void helperEleven() {}<br>    public void helperTwelve() {}<br>    public void helperThirteen() {}<br>    public void helperFourteen() {}<br>    public void helperFifteen() {}<br>    public void helperSixteen() {}<br>}<br></div>
+  </div>
+</body>
+</html>

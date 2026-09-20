@@ -1,0 +1,40 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": null,
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 1,
+      "High": 0,
+      "Critical": 0
+    },
+    "risk_score": 2
+  },
+  "findings": [
+    {
+      "type": "Model Review",
+      "severity": "Medium",
+      "line": 1,
+      "message": "Model-backed review result.",
+      "recommendation": "Refactor the logic.",
+      "severity_score": 2,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to a Groq API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Groq API error: 400 Client Error: Bad Request for url: https://api.groq.com/openai/v1/chat/completions",
+        "model": "llama-3.1-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 1,
+    "High": 0,
+    "Critical": 0
+  },
+  "risk_score": 2,
+  "total_findings": 1,
+  "code": "print('hello')"
+}

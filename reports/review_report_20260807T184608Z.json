@@ -1,0 +1,41 @@
+{
+  "language": "python",
+  "review_mode": "openai_only",
+  "model": "gpt-4.1-mini",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 1
+    },
+    "risk_score": 4
+  },
+  "findings": [
+    {
+      "type": "OpenAI Review Error",
+      "severity": "Critical",
+      "line": null,
+      "message": "OpenAI review request failed: 401 Client Error: Unauthorized for url: https://api.openai.com/v1/chat/completions",
+      "recommendation": "Set a valid OPENAI_API_KEY and verify OpenAI API connectivity.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to an OpenAI API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "OpenAI API error: 401 Client Error: Unauthorized for url: https://api.openai.com/v1/chat/completions",
+        "model": "gpt-4.1-mini"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 1
+  },
+  "risk_score": 4,
+  "total_findings": 1,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

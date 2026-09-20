@@ -1,0 +1,68 @@
+{
+  "language": "java",
+  "review_mode": "openai",
+  "model": null,
+  "summary": {
+    "total_findings": 3,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 1,
+      "High": 2,
+      "Critical": 0
+    },
+    "risk_score": 8
+  },
+  "findings": [
+    {
+      "type": "Long Parameter List",
+      "severity": "High",
+      "line": 12,
+      "message": "Too many parameters.",
+      "recommendation": "Group related parameters.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Group parameters into a single object",
+        "corrected_code_example": "public class GoodCode { public int processOrder(Order order) { int result = 0; if (order.getA() > 10) { result += order.getA(); if (order.getB() > 10) { result += order.getB(); if (order.getC() > 10) { result += order.getC(); if (order.getD() > 10) { result += order.getD(); if (order.getE() > 10) { result += order.getE(); if (order.getF() > 10) { result += order.getF(); } } } } } } return result; } } class Order { private int a, b, c, d, e, f; public Order(int a, int b, int c, int d, int e, int f) { this.a = a; this.b = b; this.c = c; this.d = d; this.e = e; this.f = f; } public int getA() { return a; } public int getB() { return b; } public int getC() { return c; } public int getD() { return d; } public int getE() { return e; } public int getF() { return f; } }",
+        "best_practice_explanation": "Grouping related parameters into a single object improves code readability and maintainability, reducing the likelihood of errors when calling methods with long parameter lists.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Deep Nesting",
+      "severity": "High",
+      "line": 20,
+      "message": "Complex nested blocks.",
+      "recommendation": "Extract helper methods.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Extract a helper method to calculate the sum of numbers greater than 10",
+        "corrected_code_example": "\n   public class GoodCode {\n       public int processOrder(int a, int b, int c, int d, int e, int f) {\n           return sumIfGreaterThanTen(a, b, c, d, e, f);\n       }\n\n       private int sumIfGreaterThanTen(int... numbers) {\n           int sum = 0;\n           for (int number : numbers) {\n               if (number > 10) {\n                   sum += number;\n               }\n           }\n           return sum;\n       }\n   }\n   ",
+        "best_practice_explanation": "Reducing deep nesting improves code readability and maintainability. By extracting a helper method, we simplify the logic and make it easier to understand and test.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Large Class",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Class has too many responsibilities.",
+      "recommendation": "Split class by domain concern.",
+      "severity_score": 2,
+      "remediation_details": {
+        "remediation": "Split the class into separate classes, each handling a specific domain concern, such as OrderProcessor and HelperMethods",
+        "corrected_code_example": "\n   public class OrderProcessor {\n       public int processOrder(int a, int b, int c, int d, int e, int f) {\n           int result = 0;\n           if (a > 10) {\n               result += a;\n               if (b > 10) {\n                   result += b;\n                   if (c > 10) {\n                       result += c;\n                       if (d > 10) {\n                           result += d;\n                           if (e > 10) {\n                               result += e;\n                               if (f > 10) {\n                                   result += f;\n                               }\n                           }\n                       }\n                   }\n               }\n           }\n           return result;\n       }\n   }\n\n   public class HelperMethods {\n       public void helperOne() {}\n       public void helperTwo() {}\n       public void helperThree() {}\n       public void helperFour() {}\n       public void helperFive() {}\n       public void helperSix() {}\n       public void helperSeven() {}\n       public void helperEight() {}\n       public void helperNine() {}\n       public void helperTen() {}\n       public void helperEleven() {}\n       public void helperTwelve() {}\n       public void helperThirteen() {}\n       public void helperFourteen() {}\n       public void helperFifteen() {}\n       public void helperSixteen() {}\n   }\n   ",
+        "best_practice_explanation": "Splitting the class into separate classes improves maintainability, readability, and scalability. Each class has a single responsibility, making it easier to modify and extend without affecting other parts of the codebase.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 1,
+    "High": 2,
+    "Critical": 0
+  },
+  "risk_score": 8,
+  "total_findings": 3,
+  "code": "public class BadCode {\n    public int processOrder(int a, int b, int c, int d, int e, int f) {\n        int result = 0;\n        if (a > 10) {\n            result += a;\n            if (b > 10) {\n                result += b;\n                if (c > 10) {\n                    result += c;\n                    if (d > 10) {\n                        result += d;\n                        if (e > 10) {\n                            result += e;\n                            if (f > 10) {\n                                result += f;\n                            }\n                        }\n                    }\n                }\n            }\n        }\n        return result;\n    }\n\n    public void helperOne() {}\n    public void helperTwo() {}\n    public void helperThree() {}\n    public void helperFour() {}\n    public void helperFive() {}\n    public void helperSix() {}\n    public void helperSeven() {}\n    public void helperEight() {}\n    public void helperNine() {}\n    public void helperTen() {}\n    public void helperEleven() {}\n    public void helperTwelve() {}\n    public void helperThirteen() {}\n    public void helperFourteen() {}\n    public void helperFifteen() {}\n    public void helperSixteen() {}\n}\n"
+}

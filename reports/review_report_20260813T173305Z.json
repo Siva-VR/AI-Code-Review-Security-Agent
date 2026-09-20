@@ -1,0 +1,211 @@
+{
+  "language": "python",
+  "review_mode": "hybrid",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 12,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 2,
+      "High": 2,
+      "Critical": 8
+    },
+    "risk_score": 42
+  },
+  "findings": [
+    {
+      "type": "Hardcoded Password",
+      "severity": "High",
+      "line": 1,
+      "message": "password = \"admin123\"",
+      "recommendation": "Store passwords in environment variables.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace hardcoded passwords with environment variables",
+        "corrected_code_example": "import os\npassword = os.environ.get('PASSWORD')",
+        "best_practice_explanation": "Storing passwords in environment variables prevents them from being exposed in the codebase, reducing the risk of unauthorized access",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded API Key",
+      "severity": "High",
+      "line": 3,
+      "message": "api_key = \"123456789\"",
+      "recommendation": "Store secrets securely.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace hardcoded API key with an environment variable or secure secret storage",
+        "corrected_code_example": "import os\napi_key = os.environ.get('API_KEY')",
+        "best_practice_explanation": "Hardcoding sensitive information like API keys poses a significant security risk. Using environment variables or secure secret storage solutions helps protect against unauthorized access and data breaches.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 7,
+      "message": "query = \"SELECT * FROM users WHERE name='\" + name + \"'\"",
+      "recommendation": "Use parameterized queries.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace string concatenation with parameterized queries",
+        "corrected_code_example": "cursor.execute('SELECT * FROM users WHERE name=%s', (name,))",
+        "best_practice_explanation": "Parameterized queries prevent user input from being executed as SQL code, reducing the risk of SQL injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 9,
+      "message": "eval(input())",
+      "recommendation": "Avoid dynamic code execution.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace eval(input()) with a safer alternative, such as a conditional statement or a dictionary-based approach",
+        "corrected_code_example": "user_input = input(); if user_input == 'expected_input': print('Hello')",
+        "best_practice_explanation": "Using eval() can lead to code injection attacks, as it executes arbitrary code. Instead, use conditional statements or dictionaries to handle user input, ensuring the code is secure and predictable.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 11,
+      "message": "exec(\"print('Hello')\")",
+      "recommendation": "Avoid dynamic code execution.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace dynamic execution with parameterized queries and avoid eval/exec",
+        "corrected_code_example": "\npassword = \"admin123\"\napi_key = \"123456789\"\nname = input()\nquery = \"SELECT * FROM users WHERE name = %s\"\nimport sqlite3\nconn = sqlite3.connect('database.db')\ncursor = conn.cursor()\ncursor.execute(query, (name,))\nresults = cursor.fetchall()\nprint(results)\n",
+        "best_practice_explanation": "Dynamic code execution with eval, exec, or subprocess can lead to code injection attacks. Using parameterized queries and prepared statements helps prevent this by separating code from user input, ensuring that input is treated as data, not code.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 15,
+      "message": "subprocess.run(\"dir\", shell=True)",
+      "recommendation": "Do not use shell=True with user input.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace shell=True with shell=False and pass the command as a list of arguments",
+        "corrected_code_example": "import subprocess\nsubprocess.run(['cmd', '/c', 'dir'])",
+        "best_practice_explanation": "Using shell=False prevents command injection attacks by avoiding the interpretation of the command through the shell, reducing the risk of executing malicious commands",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 1,
+      "message": "Hardcoded password",
+      "recommendation": "Use environment variables or a secure storage mechanism to store sensitive data",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace hardcoded passwords and API keys with environment variables or a secure storage mechanism, and avoid using eval, exec, and subprocess with user input",
+        "corrected_code_example": {
+          "password": "os.environ['PASSWORD']",
+          "api_key": "os.environ['API_KEY']",
+          "query": "SELECT * FROM users WHERE name=%s",
+          "example_usage": "import os\nimport psycopg2\nconn = psycopg2.connect(\n    dbname=os.environ['DB_NAME'],\n    user=os.environ['DB_USER'],\n    password=os.environ['PASSWORD'],\n    host=os.environ['DB_HOST'],\n    port=os.environ['DB_PORT']\n)\ncur = conn.cursor()\nname = input()\ncur.execute(\"SELECT * FROM users WHERE name=%s\", (name,))\nresults = cur.fetchall()\nprint(results)"
+        },
+        "best_practice_explanation": "Hardcoding sensitive data like passwords and API keys poses a significant security risk. Using environment variables or a secure storage mechanism protects this data from being exposed. Additionally, avoiding the use of eval, exec, and subprocess with user input prevents code injection attacks, which can lead to unauthorized access and data breaches.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 2,
+      "message": "Hardcoded API key",
+      "recommendation": "Use environment variables or a secure storage mechanism to store sensitive data",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace hardcoded API key with an environment variable",
+        "corrected_code_example": "import os\napi_key = os.environ.get('API_KEY')",
+        "best_practice_explanation": "Hardcoding sensitive data like API keys poses a significant security risk. Using environment variables or a secure storage mechanism helps protect against unauthorized access and data breaches.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 5,
+      "message": "SQL injection vulnerability",
+      "recommendation": "Use parameterized queries or prepared statements to prevent SQL injection",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace string concatenation with parameterized queries",
+        "corrected_code_example": "import sqlite3; conn = sqlite3.connect('database.db'); cursor = conn.cursor(); cursor.execute('SELECT * FROM users WHERE name=?', (name,))",
+        "best_practice_explanation": "Using parameterized queries prevents user input from being executed as SQL code, reducing the risk of SQL injection attacks",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 6,
+      "message": "Use of eval function with user input",
+      "recommendation": "Avoid using eval function with user input, use safer alternatives like ast.literal_eval",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace eval with ast.literal_eval and avoid using exec and subprocess.run with user input",
+        "corrected_code_example": "import ast; user_input = input(); try: ast.literal_eval(user_input); except ValueError: print('Invalid input')",
+        "best_practice_explanation": "Using eval, exec, and subprocess.run with user input can lead to code injection attacks. ast.literal_eval safely evaluates strings containing Python literals, preventing arbitrary code execution.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Medium",
+      "line": 7,
+      "message": "Use of exec function",
+      "recommendation": "Avoid using exec function, use safer alternatives like importlib or subprocess.run with arguments",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Medium",
+      "line": 10,
+      "message": "Use of subprocess.run with shell=True",
+      "recommendation": "Avoid using shell=True, use subprocess.run with arguments to prevent shell injection",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 2,
+    "High": 2,
+    "Critical": 8
+  },
+  "risk_score": 42,
+  "total_findings": 12,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

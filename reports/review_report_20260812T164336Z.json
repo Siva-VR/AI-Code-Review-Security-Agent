@@ -1,0 +1,116 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 6,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 1,
+      "Critical": 5
+    },
+    "risk_score": 23
+  },
+  "findings": [
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 1,
+      "message": "Hardcoded sensitive information (password)",
+      "recommendation": "Store sensitive information securely using environment variables or a secrets manager.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace hardcoded sensitive information with environment variables or a secrets manager",
+        "corrected_code_example": "import os\npassword = os.environ.get('PASSWORD')\napi_key = os.environ.get('API_KEY')",
+        "best_practice_explanation": "Hardcoding sensitive information poses a significant security risk. Using environment variables or a secrets manager helps protect sensitive data from unauthorized access and reduces the risk of credential exposure.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 2,
+      "message": "Hardcoded sensitive information (api_key)",
+      "recommendation": "Store sensitive information securely using environment variables or a secrets manager.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace hardcoded sensitive information with environment variables or a secrets manager",
+        "corrected_code_example": "import os\napi_key = os.environ.get('API_KEY')\npassword = os.environ.get('PASSWORD')",
+        "best_practice_explanation": "Hardcoding sensitive information poses a significant security risk. Using environment variables or a secrets manager to store sensitive data helps protect against unauthorized access and reduces the attack surface.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 5,
+      "message": "SQL injection vulnerability",
+      "recommendation": "Use parameterized queries or prepared statements to prevent SQL injection.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace string concatenation with parameterized queries",
+        "corrected_code_example": "\nimport sqlite3\n\npassword = \"admin123\"\napi_key = \"123456789\"\nname = input()\nconn = sqlite3.connect('database.db')\ncursor = conn.cursor()\nquery = \"SELECT * FROM users WHERE name = ?\"\ncursor.execute(query, (name,))",
+        "best_practice_explanation": "Using parameterized queries prevents SQL injection by ensuring user input is treated as literal input, not part of the SQL command.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 6,
+      "message": "Arbitrary code execution via eval",
+      "recommendation": "Avoid using eval and instead use safer alternatives such as ast.literal_eval or json.loads.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace eval and exec with safer alternatives and avoid shell=True in subprocess.run",
+        "corrected_code_example": "\n      import ast\n      import json\n      import subprocess\n\n      password = \"admin123\"\n      api_key = \"123456789\"\n      name = input()\n      query = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n      safer_input = ast.literal_eval(input())\n      subprocess.run([\"dir\"], capture_output=True)",
+        "best_practice_explanation": "Using eval, exec, and shell=True can lead to arbitrary code execution, allowing attackers to run malicious code. Instead, use safer alternatives like ast.literal_eval for literal expressions or json.loads for JSON data, and pass commands as a list to subprocess.run to avoid shell injection.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Arbitrary code execution via exec",
+      "recommendation": "Avoid using exec and instead use safer alternatives such as importlib or subprocess with careful input validation.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace exec with a safer alternative and validate user input",
+        "corrected_code_example": "import subprocess\nname = input('Enter your name: ')\nquery = \"SELECT * FROM users WHERE name='\" + name.replace(\"'\", \"''\") + \"'\"\nprint('Hello')\nsubprocess.run(['cmd', '/c', 'dir'], shell=False)",
+        "best_practice_explanation": "Using exec allows for arbitrary code execution, which is a critical security risk. Instead, use safer alternatives like subprocess with careful input validation to prevent command injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "High",
+      "line": 10,
+      "message": "Command injection vulnerability via subprocess",
+      "recommendation": "Use the subprocess module with the 'args' parameter instead of 'shell=True' to prevent command injection.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace subprocess.run with the 'args' parameter instead of 'shell=True'",
+        "corrected_code_example": "import subprocess\nsubprocess.run(['cmd', '/c', 'dir'])",
+        "best_practice_explanation": "Using 'shell=True' can lead to command injection vulnerabilities. Passing the command as a list of arguments to 'subprocess.run' ensures that the command is executed directly, without invoking a shell, thus preventing command injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 1,
+    "Critical": 5
+  },
+  "risk_score": 23,
+  "total_findings": 6,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

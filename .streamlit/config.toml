@@ -1,0 +1,17 @@
+[theme]
+base = "light"
+primaryColor = "#0b6efd"
+backgroundColor = "#f8fbff"
+secondaryBackgroundColor = "#eef4ff"
+textColor = "#0f172a"
+linkColor = "#0b6efd"
+codeBackgroundColor = "#f1f5f9"
+codeTextColor = "#0f172a"
+borderColor = "#dbe4f0"
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+headingFont = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800&display=swap"
+codeFont = "'JetBrains Mono':https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+baseRadius = "large"
+buttonRadius = "large"
+showWidgetBorder = true
+showSidebarBorder = true

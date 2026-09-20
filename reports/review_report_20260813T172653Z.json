@@ -1,0 +1,128 @@
+{
+  "language": "java",
+  "review_mode": "hybrid",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 7,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 5,
+      "High": 2,
+      "Critical": 0
+    },
+    "risk_score": 16
+  },
+  "findings": [
+    {
+      "type": "Long Parameter List",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Method has 6 parameters.",
+      "recommendation": "Reduce parameter count by grouping related inputs into a value object.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Create a value object to hold the six parameters and pass it to the method",
+        "corrected_code_example": "\n   public class Order {\n       private int a, b, c, d, e, f;\n\n       public Order(int a, int b, int c, int d, int e, int f) {\n           this.a = a;\n           this.b = b;\n           this.c = c;\n           this.d = d;\n           this.e = e;\n           this.f = f;\n       }\n\n       // Getters for the fields\n       public int getA() { return a; }\n       public int getB() { return b; }\n       public int getC() { return c; }\n       public int getD() { return d; }\n       public int getE() { return e; }\n       public int getF() { return f; }\n   }\n\n   public class GoodCode {\n       public int processOrder(Order order) {\n           int result = 0;\n           if (order.getA() > 10) {\n               result += order.getA();\n               if (order.getB() > 10) {\n                   result += order.getB();\n                   if (order.getC() > 10) {\n                       result += order.getC();\n                       if (order.getD() > 10) {\n                           result += order.getD();\n                           if (order.getE() > 10) {\n                               result += order.getE();\n                               if (order.getF() > 10) {\n                                   result += order.getF();\n                               }\n                           }\n                       }\n                   }\n               }\n           }\n           return result;\n       }\n   }\n   ",
+        "best_practice_explanation": "Reducing the number of parameters in a method makes the code easier to read and understand. By grouping related inputs into a value object, we can improve code maintainability and reduce the likelihood of errors caused by incorrect parameter ordering.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Long Method",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Method spans 22 lines.",
+      "recommendation": "Split the method into smaller helpers with a single responsibility.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Extract a helper method to sum values greater than 10",
+        "corrected_code_example": "public class GoodCode {\n    public int processOrder(int a, int b, int c, int d, int e, int f) {\n        return sumIfGreaterThanTen(a, b, c, d, e, f);\n    }\n\n    private int sumIfGreaterThanTen(int... numbers) {\n        int sum = 0;\n        for (int number : numbers) {\n            if (number > 10) {\n                sum += number;\n            }\n        }\n        return sum;\n    }\n}",
+        "best_practice_explanation": "Splitting the long method into smaller helpers improves readability and maintainability. The single responsibility principle is applied by creating a separate method for summing values greater than 10, making the code easier to understand and test.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Deep Nesting",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Method contains 6 nested control-flow statements.",
+      "recommendation": "Flatten the control flow using guard clauses or extracted methods.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Extract methods for each condition or use guard clauses to reduce nesting",
+        "corrected_code_example": "\n   public class GoodCode {\n       public int processOrder(int a, int b, int c, int d, int e, int f) {\n           int result = 0;\n           result += addIfGreaterThanTen(a);\n           result += addIfGreaterThanTen(b);\n           result += addIfGreaterThanTen(c);\n           result += addIfGreaterThanTen(d);\n           result += addIfGreaterThanTen(e);\n           result += addIfGreaterThanTen(f);\n           return result;\n       }\n\n       private int addIfGreaterThanTen(int value) {\n           return value > 10 ? value : 0;\n       }\n   }",
+        "best_practice_explanation": "Reducing deep nesting improves code readability and maintainability. By extracting a method for the conditional addition, we simplify the main method and make it easier to understand and modify.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Large Class",
+      "severity": "Medium",
+      "line": 1,
+      "message": "Class declares 17 methods.",
+      "recommendation": "Split the class into smaller cohesive components.",
+      "severity_score": 2,
+      "severity_label": "Medium",
+      "remediation_details": {
+        "remediation": "Split the class into smaller classes, each with its own responsibility",
+        "corrected_code_example": "\n   public class OrderProcessor {\n       public int processOrder(int... numbers) {\n           int result = 0;\n           for (int number : numbers) {\n               if (number > 10) {\n                   result += number;\n               }\n           }\n           return result;\n       }\n   }\n\n   public class HelperClass {\n       public void helperOne() {}\n       public void helperTwo() {}\n       // ...\n   }\n   ",
+        "best_practice_explanation": "Splitting the class into smaller components improves maintainability, readability, and reusability. Each class should have a single responsibility, making it easier to modify and extend without affecting other parts of the codebase.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Long Parameter List",
+      "severity": "High",
+      "line": 12,
+      "message": "Too many parameters.",
+      "recommendation": "Group related parameters.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Group parameters into a single object",
+        "corrected_code_example": "public class GoodCode { public int processOrder(Order order) { int result = 0; if (order.getA() > 10) { result += order.getA(); if (order.getB() > 10) { result += order.getB(); if (order.getC() > 10) { result += order.getC(); if (order.getD() > 10) { result += order.getD(); if (order.getE() > 10) { result += order.getE(); if (order.getF() > 10) { result += order.getF(); } } } } } } return result; } } class Order { private int a, b, c, d, e, f; public Order(int a, int b, int c, int d, int e, int f) { this.a = a; this.b = b; this.c = c; this.d = d; this.e = e; this.f = f; } public int getA() { return a; } public int getB() { return b; } public int getC() { return c; } public int getD() { return d; } public int getE() { return e; } public int getF() { return f; } }",
+        "best_practice_explanation": "Grouping related parameters into a single object improves code readability and maintainability, reducing the likelihood of errors when calling methods with many parameters.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Deep Nesting",
+      "severity": "High",
+      "line": 20,
+      "message": "Complex nested blocks.",
+      "recommendation": "Extract helper methods.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Extract a helper method to reduce nesting",
+        "corrected_code_example": "\npublic class GoodCode {\n    public int processOrder(int a, int b, int c, int d, int e, int f) {\n        return sumIfGreaterThanTen(a, b, c, d, e, f);\n    }\n\n    private int sumIfGreaterThanTen(int... numbers) {\n        int sum = 0;\n        for (int number : numbers) {\n            if (number > 10) {\n                sum += number;\n            }\n        }\n        return sum;\n    }\n}",
+        "best_practice_explanation": "Reducing deep nesting improves code readability and maintainability by breaking down complex logic into smaller, more manageable pieces.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Large Class",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Class has too many responsibilities.",
+      "recommendation": "Split class by domain concern.",
+      "severity_score": 2,
+      "remediation_details": {
+        "remediation": "Split the class into OrderProcessor and Helper classes",
+        "corrected_code_example": "\n   public class OrderProcessor {\n       public int processOrder(int a, int b, int c, int d, int e, int f) {\n           int result = 0;\n           if (a > 10) {\n               result += a;\n               if (b > 10) {\n                   result += b;\n                   if (c > 10) {\n                       result += c;\n                       if (d > 10) {\n                           result += d;\n                           if (e > 10) {\n                               result += e;\n                               if (f > 10) {\n                                   result += f;\n                               }\n                           }\n                       }\n                   }\n               }\n           }\n           return result;\n       }\n   }\n\n   public class Helper {\n       public void helperOne() {}\n       public void helperTwo() {}\n       public void helperThree() {}\n       public void helperFour() {}\n       public void helperFive() {}\n       public void helperSix() {}\n       public void helperSeven() {}\n       public void helperEight() {}\n       public void helperNine() {}\n       public void helperTen() {}\n       public void helperEleven() {}\n       public void helperTwelve() {}\n       public void helperThirteen() {}\n       public void helperFourteen() {}\n       public void helperFifteen() {}\n       public void helperSixteen() {}\n   }\n   ",
+        "best_practice_explanation": "Splitting the class into smaller classes improves maintainability, readability, and follows the Single Responsibility Principle (SRP), which states that a class should have only one reason to change.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 5,
+    "High": 2,
+    "Critical": 0
+  },
+  "risk_score": 16,
+  "total_findings": 7,
+  "code": "public class BadCode {\n    public int processOrder(int a, int b, int c, int d, int e, int f) {\n        int result = 0;\n        if (a > 10) {\n            result += a;\n            if (b > 10) {\n                result += b;\n                if (c > 10) {\n                    result += c;\n                    if (d > 10) {\n                        result += d;\n                        if (e > 10) {\n                            result += e;\n                            if (f > 10) {\n                                result += f;\n                            }\n                        }\n                    }\n                }\n            }\n        }\n        return result;\n    }\n\n    public void helperOne() {}\n    public void helperTwo() {}\n    public void helperThree() {}\n    public void helperFour() {}\n    public void helperFive() {}\n    public void helperSix() {}\n    public void helperSeven() {}\n    public void helperEight() {}\n    public void helperNine() {}\n    public void helperTen() {}\n    public void helperEleven() {}\n    public void helperTwelve() {}\n    public void helperThirteen() {}\n    public void helperFourteen() {}\n    public void helperFifteen() {}\n    public void helperSixteen() {}\n}\n"
+}

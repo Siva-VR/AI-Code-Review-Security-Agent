@@ -1,0 +1,66 @@
+
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: Arial, sans-serif; color: #111827; margin: 32px; }
+    h1, h2, h3 { color: #0f172a; }
+    .meta { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 18px; }
+    .card { border: 1px solid #dbe4f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    th, td { border: 1px solid #dbe4f0; padding: 8px 10px; vertical-align: top; text-align: left; }
+    th { background: #f8fbff; }
+    .code { background: #0b1020; color: #e5e7eb; padding: 14px; border-radius: 10px; white-space: normal; }
+    .small { color: #475569; font-size: 0.92rem; }
+  </style>
+</head>
+<body>
+  <h1>Code Review Report</h1>
+  <div class="meta small">
+    <div><strong>Language:</strong> java</div>
+    <div><strong>Review mode:</strong> openai</div>
+    <div><strong>Model:</strong> unknown</div>
+    <div><strong>Generated:</strong> 2026-08-12 17:41 UTC</div>
+  </div>
+
+  <div class="card">
+    <h2>Overall Assessment</h2>
+    <p>Two critical findings were identified, posing a significant risk to the application&#x27;s security.</p>
+    <p class="small"><strong>Merge readiness:</strong> Not ready for merge due to critical security findings</p>
+    <p class="small"><strong>Code health:</strong> 68/100</p>
+  </div>
+
+  <div class="card">
+    <h2>Findings Summary</h2>
+    <p class="small"><strong>Total findings:</strong> 2</p>
+    <p class="small"><strong>Risk score:</strong> 8</p>
+    <p class="small"><strong>Severity breakdown:</strong> Low 0, Medium 0, High 0, Critical 2</p>
+    <table>
+      <thead>
+        <tr><th>Type</th><th>Severity</th><th>Line</th><th>Message</th><th>Recommendation</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SQL Injection</td><td>Critical</td><td>10</td><td>Unsafe SQL string formatting.</td><td>Use prepared statements.</td></tr><tr><td>Command Injection</td><td>Critical</td><td>18</td><td>Runtime.exec with unsanitized input.</td><td>Avoid shell execution with user input.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Remediation Roadmap</h2>
+    <table>
+      <thead>
+        <tr><th>Finding</th><th>Severity</th><th>Impact</th><th>Suggested Action</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SQL Injection</td><td>Critical</td><td>High risk of security breaches</td><td>Replace string concatenation with prepared statements, e.g., PreparedStatement statement = connection.prepareStatement(&quot;SELECT * FROM ? WHERE name = ?&quot;); statement.setString(1, table); statement.setString(2, name);</td></tr><tr><td>Command Injection</td><td>Critical</td><td>High risk of command injection attacks</td><td>Use ProcessBuilder with sanitized input and avoid concatenating user input into shell commands, e.g., ProcessBuilder pb = new ProcessBuilder(&quot;cmd&quot;, &quot;/c&quot;, &quot;dir&quot;); pb.directory(new File(&quot;C:\\path\\to\\directory&quot;)); Process p = pb.start();</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Source Code Snapshot</h2>
+    <div class="code">public class VulnerableSecurity {<br>    public void runQuery(String name, String table) {<br>        String password = &quot;admin123&quot;;<br>        String api_key = &quot;ABC-123-SECRET&quot;;<br>        String query = &quot;SELECT * FROM &quot; + table + &quot; WHERE name = &#x27;&quot; + name + &quot;&#x27;&quot;;<br>        System.out.println(query + password + api_key);<br>        Runtime.getRuntime().exec(&quot;cmd /c dir &quot; + name);<br>    }<br>}<br></div>
+  </div>
+</body>
+</html>

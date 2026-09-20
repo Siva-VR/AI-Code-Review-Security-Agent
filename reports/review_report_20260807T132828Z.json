@@ -1,0 +1,35 @@
+{
+  "language": "java",
+  "review_mode": "openai_only",
+  "model": "gpt-4.1-mini",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 1
+    },
+    "risk_score": 4
+  },
+  "findings": [
+    {
+      "type": "OpenAI Review Error",
+      "severity": "Critical",
+      "line": null,
+      "message": "OPENAI_API_KEY is not configured. OpenAI-only review cannot run.",
+      "recommendation": "Set a valid OPENAI_API_KEY and verify OpenAI API connectivity.",
+      "severity_score": 4,
+      "severity_label": "Critical"
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 1
+  },
+  "risk_score": 4,
+  "total_findings": 1,
+  "code": "public class VulnerableSecurity {\n    public void runQuery(String name, String table) {\n        String password = \"admin123\";\n        String api_key = \"ABC-123-SECRET\";\n        String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";\n        System.out.println(query + password + api_key);\n        Runtime.getRuntime().exec(\"cmd /c dir \" + name);\n    }\n}\n"
+}

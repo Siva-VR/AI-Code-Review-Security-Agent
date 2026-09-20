@@ -1,0 +1,40 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": "test-model",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 1
+    },
+    "risk_score": 4
+  },
+  "findings": [
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Unsafe SQL",
+      "recommendation": "Use parameterized queries.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Use prepared statements.",
+        "corrected_code_example": "cursor.execute(\"SELECT ...\", (name,))",
+        "best_practice_explanation": "Separate code from data.",
+        "model": "test-model"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 1
+  },
+  "risk_score": 4,
+  "total_findings": 1,
+  "code": "query = \"SELECT * FROM users WHERE name= + name + \""
+}

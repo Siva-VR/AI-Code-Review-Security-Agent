@@ -1,0 +1,101 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 5,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 2,
+      "Critical": 3
+    },
+    "risk_score": 18
+  },
+  "findings": [
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 1,
+      "message": "Hardcoded sensitive information",
+      "recommendation": "Store sensitive information securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace hardcoded sensitive information with environment variables or a secrets manager, and avoid using eval, exec, and subprocess with user input",
+        "corrected_code_example": "\nimport os\npassword = os.environ.get('PASSWORD')\napi_key = os.environ.get('API_KEY')\nname = input()\nquery = \"SELECT * FROM users WHERE name=%s\" \n# use parameterized queries or prepared statements\nimport subprocess\nsubprocess.run(['dir'], shell=False)",
+        "best_practice_explanation": "Hardcoding sensitive information and using eval, exec, and subprocess with user input can lead to security vulnerabilities such as SQL injection and command injection. Using environment variables or a secrets manager to store sensitive information and avoiding the use of these functions with user input can help prevent these types of attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 5,
+      "message": "SQL injection vulnerability",
+      "recommendation": "Use parameterized queries or prepared statements to prevent SQL injection",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace string concatenation with parameterized queries",
+        "corrected_code_example": "import sqlite3; conn = sqlite3.connect('database.db'); cursor = conn.cursor(); cursor.execute('SELECT * FROM users WHERE name=?', (name,))",
+        "best_practice_explanation": "Using parameterized queries prevents user input from being executed as SQL code, reducing the risk of SQL injection attacks",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Use of eval() function with user input",
+      "recommendation": "Avoid using eval() with user input, use a safer alternative such as ast.literal_eval() or a parsing library",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace eval() with ast.literal_eval() and avoid using user input directly in SQL queries and system commands",
+        "corrected_code_example": "\nimport ast\nimport subprocess\n\npassword = \"admin123\"\napi_key = \"123456789\"\n\nname = input()\n\n# Using parameterized query to prevent SQL injection\nimport sqlite3\nconn = sqlite3.connect('database.db')\ncursor = conn.cursor()\ncursor.execute(\"SELECT * FROM users WHERE name=?\", (name,))\n\n# Using ast.literal_eval() for safe evaluation\ntry:\n    safe_input = ast.literal_eval(input())\nexcept ValueError:\n    print(\"Invalid input\")\nexcept SyntaxError:\n    print(\"Invalid input\")\n\n# Avoid using shell=True for subprocess\nsubprocess.run([\"dir\"])\n",
+        "best_practice_explanation": "Using eval() with user input can lead to code injection attacks. ast.literal_eval() safely evaluates strings containing Python literals. Parameterized queries prevent SQL injection. Avoiding shell=True in subprocess prevents command injection.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "High",
+      "line": 9,
+      "message": "Use of exec() function",
+      "recommendation": "Avoid using exec(), use a safer alternative such as a templating engine or a code generation library",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace exec() with a safer alternative and remove eval() and subprocess.run() with shell=True",
+        "corrected_code_example": "print('Hello')\n# or for dynamic code, consider using a templating engine or code generation library",
+        "best_practice_explanation": "Using exec(), eval(), and subprocess.run() with shell=True can lead to code injection vulnerabilities. Avoid these functions to prevent attackers from executing arbitrary code.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "High",
+      "line": 11,
+      "message": "Use of subprocess with shell=True",
+      "recommendation": "Avoid using shell=True, use a safer alternative such as subprocess.run() with the 'args' parameter or a library like shlex",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace subprocess.run with shell=False and pass the command as a list of arguments",
+        "corrected_code_example": "import subprocess\nsubprocess.run(['cmd', '/c', 'dir'])",
+        "best_practice_explanation": "Using shell=True can lead to shell injection attacks, passing the command as a list of arguments avoids this risk",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 2,
+    "Critical": 3
+  },
+  "risk_score": 18,
+  "total_findings": 5,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

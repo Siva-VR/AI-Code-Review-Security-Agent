@@ -1,0 +1,35 @@
+{
+  "language": "java",
+  "review_mode": "groq_only",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 1
+    },
+    "risk_score": 4
+  },
+  "findings": [
+    {
+      "type": "Groq Review Error",
+      "severity": "Critical",
+      "line": null,
+      "message": "Groq rate limit reached. Please wait and try again.",
+      "recommendation": "Set a valid GROQ_API_KEY and verify Groq API connectivity.",
+      "severity_score": 4,
+      "severity_label": "Critical"
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 1
+  },
+  "risk_score": 4,
+  "total_findings": 1,
+  "code": "public class VulnerableSecurity {\n    public void runQuery(String name, String table) {\n        String password = \"admin123\";\n        String api_key = \"ABC-123-SECRET\";\n        String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";\n        System.out.println(query + password + api_key);\n        Runtime.getRuntime().exec(\"cmd /c dir \" + name);\n    }\n}\n"
+}

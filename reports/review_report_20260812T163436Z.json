@@ -1,0 +1,54 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": null,
+  "summary": {
+    "total_findings": 2,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 2
+    },
+    "risk_score": 8
+  },
+  "findings": [
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Unsafe SQL string concatenation.",
+      "recommendation": "Use parameterized queries.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Replace string concatenation with parameterized queries",
+        "corrected_code_example": "import sqlite3; conn = sqlite3.connect('database.db'); cursor = conn.cursor(); query = 'SELECT * FROM users WHERE name=?'; cursor.execute(query, (name,))",
+        "best_practice_explanation": "Parameterized queries prevent user input from being executed as SQL code, reducing the risk of SQL injection attacks and improving overall security.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 9,
+      "message": "eval(input()) usage.",
+      "recommendation": "Remove eval.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Replace eval(input()) with a safer input validation and parsing mechanism",
+        "corrected_code_example": "user_input = input(); print(f'Received input: {user_input}')",
+        "best_practice_explanation": "Using eval() with user input allows for arbitrary code execution, making it a critical security vulnerability. Instead, validate and parse user input using safer methods to prevent code injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 2
+  },
+  "risk_score": 8,
+  "total_findings": 2,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

@@ -1,0 +1,35 @@
+{
+  "language": "python",
+  "review_mode": "groq_only",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 1
+    },
+    "risk_score": 4
+  },
+  "findings": [
+    {
+      "type": "Groq Review Error",
+      "severity": "Critical",
+      "line": null,
+      "message": "GROQ_API_KEY is not configured. Groq-backed review cannot run.",
+      "recommendation": "Set a valid GROQ_API_KEY and verify Groq API connectivity.",
+      "severity_score": 4,
+      "severity_label": "Critical"
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 1
+  },
+  "risk_score": 4,
+  "total_findings": 1,
+  "code": "print('hello')"
+}

@@ -1,0 +1,40 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 1,
+      "High": 0,
+      "Critical": 0
+    },
+    "risk_score": 2
+  },
+  "findings": [
+    {
+      "type": "Model Review",
+      "severity": "Medium",
+      "line": 1,
+      "message": "Model-backed review result.",
+      "recommendation": "Refactor the logic.",
+      "severity_score": 2,
+      "remediation_details": {
+        "remediation": "Replace print statement with a logging mechanism",
+        "corrected_code_example": "import logging\nlogging.basicConfig(level=logging.INFO)\nlogging.info('hello')",
+        "best_practice_explanation": "Using a logging mechanism instead of print statements allows for better control over output and easier debugging in larger applications.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 1,
+    "High": 0,
+    "Critical": 0
+  },
+  "risk_score": 2,
+  "total_findings": 1,
+  "code": "print('hello')"
+}

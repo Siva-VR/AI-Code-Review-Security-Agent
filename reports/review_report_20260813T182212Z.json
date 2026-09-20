@@ -1,0 +1,206 @@
+{
+  "language": "python",
+  "review_mode": "hybrid",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 12,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 2,
+      "Critical": 10
+    },
+    "risk_score": 46
+  },
+  "findings": [
+    {
+      "type": "Hardcoded Password",
+      "severity": "High",
+      "line": 1,
+      "message": "password = \"admin123\"",
+      "recommendation": "Store passwords in environment variables.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded API Key",
+      "severity": "High",
+      "line": 3,
+      "message": "api_key = \"123456789\"",
+      "recommendation": "Store secrets securely.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 7,
+      "message": "query = \"SELECT * FROM users WHERE name='\" + name + \"'\"",
+      "recommendation": "Use parameterized queries.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 9,
+      "message": "eval(input())",
+      "recommendation": "Avoid dynamic code execution.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 11,
+      "message": "exec(\"print('Hello')\")",
+      "recommendation": "Avoid dynamic code execution.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 15,
+      "message": "subprocess.run(\"dir\", shell=True)",
+      "recommendation": "Do not use shell=True with user input.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded Credentials",
+      "severity": "Critical",
+      "line": 1,
+      "message": "Hardcoded password found in the code",
+      "recommendation": "Store sensitive information securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded Credentials",
+      "severity": "Critical",
+      "line": 3,
+      "message": "Hardcoded API key found in the code",
+      "recommendation": "Store sensitive information securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 5,
+      "message": "User input is directly concatenated into a SQL query, making it vulnerable to SQL injection attacks",
+      "recommendation": "Use parameterized queries or prepared statements to prevent SQL injection",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Arbitrary Code Execution",
+      "severity": "Critical",
+      "line": 7,
+      "message": "The eval function is used with user input, allowing arbitrary code execution",
+      "recommendation": "Avoid using eval with user input and instead use a safer alternative, such as a parsing library",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Arbitrary Code Execution",
+      "severity": "Critical",
+      "line": 9,
+      "message": "The exec function is used, allowing arbitrary code execution",
+      "recommendation": "Avoid using exec and instead use a safer alternative, such as a parsing library or a templating engine",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 12,
+      "message": "The subprocess.run function is used with the shell=True argument, making it vulnerable to command injection attacks",
+      "recommendation": "Use the subprocess.run function with the shell=False argument and pass the command and arguments as a list to prevent command injection",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 2,
+    "Critical": 10
+  },
+  "risk_score": 46,
+  "total_findings": 12,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

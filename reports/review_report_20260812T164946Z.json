@@ -1,0 +1,108 @@
+{
+  "language": "python",
+  "review_mode": "openai",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 6,
+    "critical": 4,
+    "high": 1,
+    "medium": 0,
+    "low": 0
+  },
+  "findings": [
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 1,
+      "message": "Hardcoded sensitive information",
+      "recommendation": "Store sensitive information securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace hardcoded sensitive information with environment variables or a secrets manager, and avoid using eval, exec, and subprocess with user input",
+        "corrected_code_example": "\nimport os\npassword = os.environ.get('PASSWORD')\napi_key = os.environ.get('API_KEY')\nname = input()\nquery = \"SELECT * FROM users WHERE name=%s\" \n# use parameterized queries or prepared statements\nimport subprocess\nsubprocess.run(['dir'], shell=False)",
+        "best_practice_explanation": "Hardcoding sensitive information and using eval, exec, and subprocess with user input can lead to security vulnerabilities like SQL injection and command injection. Using environment variables or a secrets manager to store sensitive information and avoiding the use of eval, exec, and subprocess with user input can help prevent these vulnerabilities.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 2,
+      "message": "Hardcoded API key",
+      "recommendation": "Store API keys securely using environment variables or a secrets manager",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace hardcoded API key with an environment variable",
+        "corrected_code_example": "import os\napi_key = os.environ.get('API_KEY')",
+        "best_practice_explanation": "Hardcoding sensitive information like API keys poses a significant security risk. Using environment variables or a secrets manager to store API keys keeps them out of version control and reduces the risk of unauthorized access.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 5,
+      "message": "SQL injection vulnerability",
+      "recommendation": "Use parameterized queries or prepared statements to prevent SQL injection",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace string concatenation with parameterized queries",
+        "corrected_code_example": "import sqlite3; conn = sqlite3.connect('database.db'); cursor = conn.cursor(); cursor.execute('SELECT * FROM users WHERE name=?', (name,))",
+        "best_practice_explanation": "Using parameterized queries prevents user input from being executed as SQL code, reducing the risk of SQL injection attacks and protecting sensitive data",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Use of eval function with user input",
+      "recommendation": "Avoid using eval function with user input, use a safer alternative such as ast.literal_eval",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace eval function with ast.literal_eval and avoid using user input in exec and subprocess functions",
+        "corrected_code_example": "import ast\nname = input()\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\ntry:\n    ast.literal_eval(input())\nexcept ValueError:\n    print(\"Invalid input\")\nprint('Hello')",
+        "best_practice_explanation": "Using eval with user input allows for code injection attacks. ast.literal_eval safely evaluates strings containing Python literals. Avoid using exec and subprocess with user input to prevent command injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "Critical",
+      "line": 9,
+      "message": "Use of exec function",
+      "recommendation": "Avoid using exec function, use a safer alternative such as importing modules or using a function call",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace exec function with a safer alternative such as print function",
+        "corrected_code_example": "print('Hello')",
+        "best_practice_explanation": "The exec function can pose a security risk if you're planning to execute user-supplied input, as it can evaluate any Python expression. Using a safer alternative such as the print function can help prevent code injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Security",
+      "severity": "High",
+      "line": 11,
+      "message": "Use of subprocess with shell=True",
+      "recommendation": "Avoid using shell=True, use a safer alternative such as subprocess.run with a list of arguments",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace subprocess.run with shell=True to subprocess.run with a list of arguments",
+        "corrected_code_example": "import subprocess\nsubprocess.run(['cmd', '/c', 'dir'])",
+        "best_practice_explanation": "Using shell=True can lead to shell injection attacks, whereas passing a list of arguments to subprocess.run avoids this risk by not invoking the shell",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {},
+  "risk_score": null,
+  "total_findings": 6,
+  "code": "password = \"admin123\"\n\napi_key = \"123456789\"\n\nname = input()\n\nquery = \"SELECT * FROM users WHERE name='\" + name + \"'\"\n\neval(input())\n\nexec(\"print('Hello')\")\n\nimport subprocess\n\nsubprocess.run(\"dir\", shell=True)"
+}

@@ -1,0 +1,68 @@
+{
+  "language": "java",
+  "review_mode": "openai",
+  "model": null,
+  "summary": {
+    "total_findings": 3,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 1,
+      "High": 2,
+      "Critical": 0
+    },
+    "risk_score": 8
+  },
+  "findings": [
+    {
+      "type": "Long Parameter List",
+      "severity": "High",
+      "line": 12,
+      "message": "Too many parameters.",
+      "recommendation": "Group related parameters.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Deep Nesting",
+      "severity": "High",
+      "line": 20,
+      "message": "Complex nested blocks.",
+      "recommendation": "Extract helper methods.",
+      "severity_score": 3,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Large Class",
+      "severity": "Medium",
+      "line": 2,
+      "message": "Class has too many responsibilities.",
+      "recommendation": "Split class by domain concern.",
+      "severity_score": 2,
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped because Groq rate limited the request.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "Try again after the rate limit window resets.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 1,
+    "High": 2,
+    "Critical": 0
+  },
+  "risk_score": 8,
+  "total_findings": 3,
+  "code": "public class BadCode {\n    public int processOrder(int a, int b, int c, int d, int e, int f) {\n        int result = 0;\n        if (a > 10) {\n            result += a;\n            if (b > 10) {\n                result += b;\n                if (c > 10) {\n                    result += c;\n                    if (d > 10) {\n                        result += d;\n                        if (e > 10) {\n                            result += e;\n                            if (f > 10) {\n                                result += f;\n                            }\n                        }\n                    }\n                }\n            }\n        }\n        return result;\n    }\n\n    public void helperOne() {}\n    public void helperTwo() {}\n    public void helperThree() {}\n    public void helperFour() {}\n    public void helperFive() {}\n    public void helperSix() {}\n    public void helperSeven() {}\n    public void helperEight() {}\n    public void helperNine() {}\n    public void helperTen() {}\n    public void helperEleven() {}\n    public void helperTwelve() {}\n    public void helperThirteen() {}\n    public void helperFourteen() {}\n    public void helperFifteen() {}\n    public void helperSixteen() {}\n}\n"
+}

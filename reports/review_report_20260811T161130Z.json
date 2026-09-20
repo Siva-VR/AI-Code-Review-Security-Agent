@@ -1,0 +1,41 @@
+{
+  "language": "java",
+  "review_mode": "openai_only",
+  "model": "gpt-4.1-mini",
+  "summary": {
+    "total_findings": 1,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 0,
+      "Critical": 1
+    },
+    "risk_score": 4
+  },
+  "findings": [
+    {
+      "type": "OpenAI Review Error",
+      "severity": "Critical",
+      "line": null,
+      "message": "OpenAI review request failed: 429 Client Error: Too Many Requests for url: https://api.openai.com/v1/chat/completions",
+      "recommendation": "Set a valid OPENAI_API_KEY and verify OpenAI API connectivity.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Remediation generation was skipped due to an OpenAI API error.",
+        "corrected_code_example": "",
+        "best_practice_explanation": "OpenAI API error: 429 Client Error: Too Many Requests for url: https://api.openai.com/v1/chat/completions",
+        "model": "gpt-4.1-mini"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 0,
+    "Critical": 1
+  },
+  "risk_score": 4,
+  "total_findings": 1,
+  "code": "public class VulnerableSecurity {\n    public void runQuery(String name, String table) {\n        String password = \"admin123\";\n        String api_key = \"ABC-123-SECRET\";\n        String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";\n        System.out.println(query + password + api_key);\n        Runtime.getRuntime().exec(\"cmd /c dir \" + name);\n    }\n}\n"
+}

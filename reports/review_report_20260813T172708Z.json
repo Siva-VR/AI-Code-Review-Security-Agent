@@ -1,0 +1,159 @@
+{
+  "language": "java",
+  "review_mode": "hybrid",
+  "model": "llama-3.3-70b-versatile",
+  "summary": {
+    "total_findings": 9,
+    "severity_breakdown": {
+      "Low": 0,
+      "Medium": 0,
+      "High": 4,
+      "Critical": 5
+    },
+    "risk_score": 32
+  },
+  "findings": [
+    {
+      "type": "Hardcoded Secret",
+      "severity": "High",
+      "line": 3,
+      "message": "String password = \"admin123\";",
+      "recommendation": "Load secrets from environment variables or a secure vault.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace hardcoded secrets with environment variables or a secure vault",
+        "corrected_code_example": "public class SecureSecurity {\n    public void runQuery(String name, String table) {\n        String password = System.getenv(\"DB_PASSWORD\");\n        String api_key = System.getenv(\"API_KEY\");\n        // ... rest of the code\n    }\n}",
+        "best_practice_explanation": "Hardcoding secrets directly in the codebase poses a significant security risk. Loading secrets from environment variables or a secure vault ensures they are not committed to version control and reduces the attack surface.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded Secret",
+      "severity": "High",
+      "line": 4,
+      "message": "String api_key = \"ABC-123-SECRET\";",
+      "recommendation": "Load secrets from environment variables or a secure vault.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace hardcoded secrets with environment variables",
+        "corrected_code_example": "public class SecureSecurity {\n    public void runQuery(String name, String table) {\n        String password = System.getenv(\"DB_PASSWORD\");\n        String api_key = System.getenv(\"API_KEY\");\n        String query = \"SELECT * FROM \" + table + \" WHERE name = ?\";\n        // Use prepared statements to prevent SQL injection\n        System.out.println(query + password + api_key);\n        // Avoid command injection by not directly executing user input\n    }\n}",
+        "best_practice_explanation": "Hardcoding secrets directly in code poses significant security risks. Loading secrets from environment variables or a secure vault ensures they are not committed to version control and reduces the attack surface. Additionally, using prepared statements for database queries prevents SQL injection attacks.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 5,
+      "message": "String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";",
+      "recommendation": "Use prepared statements and parameter binding.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace string concatenation with prepared statements and parameter binding",
+        "corrected_code_example": "PreparedStatement statement = connection.prepareStatement(\"SELECT * FROM ? WHERE name = ?\");\nstatement.setString(1, table);\nstatement.setString(2, name);",
+        "best_practice_explanation": "Using prepared statements with parameter binding prevents SQL injection by separating code from user input, ensuring that user input is treated as data, not executable code.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Runtime.getRuntime().exec(\"cmd /c dir \" + name);",
+      "recommendation": "Avoid shell execution with user-controlled input.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Use ProcessBuilder with a fixed command and pass user input as arguments",
+        "corrected_code_example": "ProcessBuilder pb = new ProcessBuilder(\"cmd\", \"/c\", \"dir\", name); pb.start();",
+        "best_practice_explanation": "Avoiding shell execution with user-controlled input prevents command injection attacks, reducing the risk of unauthorized system access and data breaches.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded Password",
+      "severity": "High",
+      "line": 3,
+      "message": "String password = \"admin123\";",
+      "recommendation": "Store passwords in environment variables.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace hardcoded password with an environment variable",
+        "corrected_code_example": "String password = System.getenv(\"DB_PASSWORD\");",
+        "best_practice_explanation": "Storing passwords in environment variables prevents them from being committed to version control, reducing the risk of unauthorized access and credential exposure.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Hardcoded API Key",
+      "severity": "High",
+      "line": 4,
+      "message": "String api_key = \"ABC-123-SECRET\";",
+      "recommendation": "Store secrets securely.",
+      "severity_score": 3,
+      "severity_label": "High",
+      "remediation_details": {
+        "remediation": "Replace hardcoded API key with a secure environment variable or secrets manager",
+        "corrected_code_example": "String api_key = System.getenv(\"API_KEY\");",
+        "best_practice_explanation": "Hardcoding sensitive information like API keys exposes them to unauthorized access, making it easier for attackers to exploit. Using environment variables or a secrets manager keeps sensitive data secure and separate from code.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Dangerous Dynamic Execution",
+      "severity": "Critical",
+      "line": 7,
+      "message": "Runtime.getRuntime().exec(\"cmd /c dir \" + name);",
+      "recommendation": "Avoid dynamic code execution.",
+      "severity_score": 4,
+      "severity_label": "Critical",
+      "remediation_details": {
+        "remediation": "Replace Runtime.getRuntime().exec() with a static method call or a parameterized query",
+        "corrected_code_example": "File file = new File(name); if (file.exists()) { System.out.println(file.listFiles()); }",
+        "best_practice_explanation": "Dynamic code execution can lead to command injection attacks. Using a static method call or a parameterized query helps prevent user input from being executed as code, reducing the risk of security breaches.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "SQL Injection",
+      "severity": "Critical",
+      "line": 10,
+      "message": "Unsafe SQL string formatting.",
+      "recommendation": "Use prepared statements.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Replace string concatenation with prepared statements",
+        "corrected_code_example": "PreparedStatement statement = connection.prepareStatement(\"SELECT * FROM ? WHERE name = ?\"); statement.setString(1, table); statement.setString(2, name);",
+        "best_practice_explanation": "Using prepared statements prevents user input from being executed as SQL code, reducing the risk of SQL injection attacks and protecting sensitive data.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    },
+    {
+      "type": "Command Injection",
+      "severity": "Critical",
+      "line": 18,
+      "message": "Runtime.exec with unsanitized input.",
+      "recommendation": "Avoid shell execution with user input.",
+      "severity_score": 4,
+      "remediation_details": {
+        "remediation": "Use parameterized queries and avoid Runtime.exec with user input",
+        "corrected_code_example": "public class SecureSecurity {\n    public void runQuery(String name, String table) {\n        // Using a parameterized query to prevent SQL injection\n        String query = \"SELECT * FROM \" + table + \" WHERE name = ?\";\n        // Avoid Runtime.exec, instead use Java's File API for directory operations\n        File dir = new File(name);\n        if (dir.exists()) {\n            System.out.println(\"Directory exists: \" + dir.getAbsolutePath());\n        }\n    }\n}",
+        "best_practice_explanation": "Using parameterized queries prevents command injection by separating the SQL command from the user input. Additionally, avoiding Runtime.exec with user input prevents command injection attacks, as it allows an attacker to execute arbitrary system commands. Instead, use Java's File API for directory operations.",
+        "model": "llama-3.3-70b-versatile"
+      }
+    }
+  ],
+  "severity_breakdown": {
+    "Low": 0,
+    "Medium": 0,
+    "High": 4,
+    "Critical": 5
+  },
+  "risk_score": 32,
+  "total_findings": 9,
+  "code": "public class VulnerableSecurity {\n    public void runQuery(String name, String table) {\n        String password = \"admin123\";\n        String api_key = \"ABC-123-SECRET\";\n        String query = \"SELECT * FROM \" + table + \" WHERE name = '\" + name + \"'\";\n        System.out.println(query + password + api_key);\n        Runtime.getRuntime().exec(\"cmd /c dir \" + name);\n    }\n}\n"
+}
